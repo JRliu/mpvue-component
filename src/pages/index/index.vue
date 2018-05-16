@@ -3,6 +3,7 @@
     <div class="btns">
       <button @tap="goPopup">popup</button>
       <button @tap="goToast">toast</button>
+      <button @tap="goCountTo">countTo</button>
     </div>
   </div>
 </template>
@@ -28,6 +29,11 @@ export default {
     goToast () {
       wx.navigateTo({
         url: '/pages/toast/main'
+      })
+    },
+    goCountTo () {
+      wx.navigateTo({
+        url: '/pages/count_to/main'
       })
     }
   },

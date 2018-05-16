@@ -1,21 +1,54 @@
 # mpvue-component
 
-> A Mpvue project
+> mpvue 组件库
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
+<img src="https://raw.githubusercontent.com/JRliu/JRliu.github.io/master/img/toast.gif" style="margin-right: 30px;height:500px">
+<img src="https://raw.githubusercontent.com/JRliu/JRliu.github.io/master/img/popup.gif"  style="margin-right: 30px;height:500px">
+----
+## toast
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+### usage
 ```
+<!-- template 内引入组件，并设置ref -->
+<toast ref='toast'></toast>
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+<!-- script 内引入组件 -->
+import toast from '@/components/toast'
+
+<!-- 执行组件里的方法 -->
+...
+this.$refs.toast.toast('hello')
+或
+this.$refs.toast.toast({
+  text: 'haha',
+  position: 'top',
+  duration: 3000
+})
+```
+|参数|说明|类型|可选值|默认值|
+|:-|:-|:-|:-|:-|
+|text|文字内容|String|-|-|
+|position|位置|String|<code>center</code>,<code>top</code>,<code>bottom</code>|<code>bottom</code>|
+|duration|持续时间|Number|-|3000|
+
+----
+## popup
+### usage
+```
+<!-- template 内引入组件，设置ref，填充插槽内容 -->
+<popup ref="leftPopup"  type="left">
+  <p>哈哈哈</p>
+</popup>
+
+<!-- script 内引入组件 -->
+import toast from '@/components/popup'
+
+<!-- 执行组件里的方法 -->
+...
+this.$refs.leftPopup.toggle('show')
+```
+|参数|说明|类型|可选值|默认值|
+|:-|:-|:-|:-|:-|
+|type (prop)|类型|String|`center`,`top`,`left`,`right`,`bottom`|`center`|
+|isShow (组件toggle方法的参数)|是否显示|String|`show`,`hide`|-|

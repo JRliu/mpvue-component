@@ -3,8 +3,10 @@
     <count-to :start-num="startNum"
       :end-num="endNum"
       :duration="duration"
+      :switch="counterSwitch"
       ref="countTo"  className="my_counter">
     </count-to>
+
     <label for="" class="input_label">
       <p>startNum</p>
       <input type="digit" v-model="startNum" focus=true>
@@ -16,6 +18,11 @@
     <label for="" class="input_label">
       <p>duration</p>
       <input type="digit" v-model="duration">
+    </label>
+    <label for="" class="input_label">
+      <p>switch</p>
+      <switch type="switch" :checked="counterSwitch"
+      @change="counterSwitch=!counterSwitch" />
     </label>
     <button @tap="start"  size=mini>开始</button>
   </div>
@@ -32,7 +39,8 @@
       return {
         startNum: 12,
         endNum: 365.33,
-        duration: 1200
+        duration: 3200,
+        counterSwitch: true
       }
     },
     methods: {
@@ -60,6 +68,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 60%;
     & + .input_label{
       margin-top: 20px;
     }
@@ -67,7 +76,6 @@
       font-size: 30rpx;
     }
     input{
-      margin-left: 30rpx;
       padding: 0 20rpx;
       width: 200rpx;
       text-align: right;

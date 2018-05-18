@@ -15,6 +15,7 @@
       <button @tap="goToast">toast</button>
       <button @tap="goCountTo">countTo</button>
       <button @tap="goWaterfall">waterfall</button>
+      <button @tap="goLoadmore">loadmore</button>
     </div>
   </div>
 </template>
@@ -26,9 +27,6 @@ export default {
       motto: 'Hello World',
       userInfo: {}
     }
-  },
-
-  components: {
   },
 
   methods: {
@@ -50,6 +48,11 @@ export default {
     goWaterfall () {
       wx.navigateTo({
         url: '/pages/waterfall/main'
+      })
+    },
+    goLoadmore () {
+      wx.navigateTo({
+        url: '/pages/loadmore/main'
       })
     }
   },

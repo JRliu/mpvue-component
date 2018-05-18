@@ -14,6 +14,7 @@
       <button @tap="goPopup">popup</button>
       <button @tap="goToast">toast</button>
       <button @tap="goCountTo">countTo</button>
+      <button @tap="goWaterfall">waterfall</button>
     </div>
   </div>
 </template>
@@ -44,6 +45,11 @@ export default {
     goCountTo () {
       wx.navigateTo({
         url: '/pages/count_to/main'
+      })
+    },
+    goWaterfall () {
+      wx.navigateTo({
+        url: '/pages/waterfall/main'
       })
     }
   },

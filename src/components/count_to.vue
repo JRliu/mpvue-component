@@ -1,5 +1,5 @@
 <template>
-  <p class="num" :class="className">{{showNum}}</p>
+  <p class="my_count_to" :class="className">{{showNum}}</p>
 </template>
 
 <script>
@@ -52,7 +52,7 @@
         let numInterval = diff / stepNum // 每步间隔数值
         let remain = diff % numInterval // 余数
         let maxMultiple = to - remain
-        console.log(remain)
+
         let tick = () => {
           this.activeNum += numInterval
           // 先忽视余数

@@ -6,6 +6,8 @@ app.$mount()
 
 export default {
   config: {
-    navigationBarTitleText: 'mpvue-component'
+    navigationBarTitleText: 'mpvue-component',
+    enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark'
   }
 }

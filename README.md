@@ -52,3 +52,6 @@ this.$refs.leftPopup.toggle('show')
 |:-|:-|:-|:-|:-|
 |type (prop)|类型|String|`center`,`top`,`left`,`right`,`bottom`|`center`|
 |isShow (组件toggle方法的参数)|是否显示|String|`show`,`hide`|-|
+|mask(prop)|是否显示mask|Boolean|`true`,`false`|`true`|
+|duration(prop,mask为false时生效)|popup持续时间|Number|-|2500|
+|class-name|传入class|String|-|无|

@@ -4,7 +4,7 @@
       :end-num="endNum"
       :duration="duration"
       :switch="counterSwitch"
-      ref="countTo"  className="my_counter">
+      ref="countTo"  class-name="my_counter">
     </count-to>
 
     <label for="" class="input_label">

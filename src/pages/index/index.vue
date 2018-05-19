@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import '@/style/grid.scss'
 export default {
   data () {
     return {
@@ -28,7 +29,6 @@ export default {
       userInfo: {}
     }
   },
-
   methods: {
     goPopup () {
       wx.navigateTo({
@@ -58,7 +58,7 @@ export default {
   },
 
   created () {
-
+    console.log(this)
   }
 }
 </script>

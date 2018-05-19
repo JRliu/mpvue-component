@@ -1,12 +1,14 @@
 <template>
   <div class="my-popup"
-    :style="{'display': componentDisplay}">
+    :style="{'display': componentDisplay}"
+    :class="className">
     <div class="content"
         :class="contentClass"
         @transitionend="transitionEnd">
       <slot></slot>
     </div>
     <div class="mask"
+      v-if="mask"
       @tap="toggle('hide')"
       @touchstart="touchStart"
       @touchmove="touchMove"
@@ -21,6 +23,18 @@
       type: {
         type: String,
         default: 'center'
+      },
+      mask: {
+        type: Boolean,
+        default: true
+      },
+      duration: {
+        type: Number,
+        default: 2500
+      },
+      className: {
+        type: String,
+        default: ''
       }
     },
     data () {
@@ -36,9 +50,7 @@
         touchTime: ''
       }
     },
-    computed: {
 
-    },
     watch: {
       show (val, oldVal) {
         let classList = [this.type]
@@ -51,6 +63,15 @@
             this.contentClass = classList.join(' ')
             this.maskClass = 'active'
           })
+          // 如果 this.mask 为false，则一段时间后自动关闭
+          if (!this.mask) {
+            if (this.duration === -1) { // duration为-1则不会自动隐藏
+              return
+            }
+            setTimeout(() => {
+              this.toggle('hide')
+            }, this.duration)
+          }
         }
       }
     },

@@ -1,5 +1,5 @@
 <template>
-  <div class="my_loadmore">
+  <div class="my_loadmore"  :class="className">
     <div class="loadmore loading" v-if="type==='loading'">
       <span class="juhua"></span>
       <span class="tips">{{tips}}</span>
@@ -30,6 +30,10 @@
             return '暂无数据'
           }
         }
+      },
+      className: {
+        type: String,
+        default: ''
       }
     },
     data () {

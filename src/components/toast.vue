@@ -1,12 +1,18 @@
 <template>
   <div class="my-toast"
-    :class="[showClass, positionClass]">
+    :class="[showClass, positionClass, className]">
     {{text}}
   </div>
 </template>
 
 <script>
   export default {
+    props: {
+      className: {
+        type: String,
+        default: ''
+      }
+    },
     data () {
       return {
         text: '',

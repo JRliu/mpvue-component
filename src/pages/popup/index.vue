@@ -6,6 +6,7 @@
       <button  @tap="togglePopup('rightPopup')">right</button>
       <button  @tap="togglePopup('bottomPopup')">bottom</button>
       <button  @tap="togglePopup('leftPopup')">left</button>
+      <button  @tap="togglePopup('topNoMaskPopup')">top(no mask)</button>
     </div>
     <popup ref="centerPopup">
       <p v-for="item in list" :key="item">item</p>
@@ -21,6 +22,10 @@
     </popup>
     <popup ref="leftPopup"  type="left">
       <p v-for="item in list" :key="item">item</p>
+    </popup>
+    <popup ref="topNoMaskPopup"  type="top" :mask="false"
+      class-name="topNoMaskPopup"  :duration='-1'>
+      <p>您的余额不足，请给我马上充值！</p>
     </popup>
   </div>
 </template>
@@ -39,7 +44,7 @@
     },
     methods: {
       togglePopup (ref) {
-        this.$refs[ref].toggle('show')
+        this.$refs[ref].toggle()
       }
     }
   }
@@ -58,3 +63,12 @@
     padding: 10rpx 30rpx;
   }
 </style>
+<style>
+  .topNoMaskPopup p{
+    color: #fff;
+    font-size: 24rpx;
+    text-align: center;
+    background-color: #ff3666;
+  }
+</style>
+

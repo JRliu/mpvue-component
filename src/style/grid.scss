@@ -1,0 +1,15 @@
+$col_length: 24;
+
+.my-col{
+  float: left;
+  box-sizing:border-box;
+}
+
+@for $index from 1 through $col_length {
+  .my-col-#{$index} {
+    width: 100% / $col_length * $index;
+  }
+  .my-col-offset-#{$index} {
+    margin-left: 100% / $col_length * $index;
+  }
+}

@@ -16,6 +16,7 @@
       <button @tap="goCountTo">countTo</button>
       <button @tap="goWaterfall">waterfall</button>
       <button @tap="goLoadmore">loadmore</button>
+      <button @tap="goPoster">poster</button>
     </div>
   </div>
 </template>
@@ -53,6 +54,11 @@ export default {
     goLoadmore () {
       wx.navigateTo({
         url: '/pages/loadmore/main'
+      })
+    },
+    goPoster () {
+      wx.navigateTo({
+        url: '/pages/poster/main'
       })
     }
   },

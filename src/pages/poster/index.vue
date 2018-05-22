@@ -1,11 +1,13 @@
 <template>
   <div class="app">
-    <div class="canvas_wrap"
+    <canvas canvas-id="shareCanvas"
+    class="canvas"
+    style="width: 600px;height: 479px;visibility: hidden;position: fixed;">
+    </canvas>
+    <div class="poster_wrap"
       v-if="complete">
-      <canvas canvas-id="shareCanvas"
-      class="canvas"
-      style="width: 300px;height: 400px;box-shadow:0px 4px 5px 1px rgba(0,0,0,0.4);border-radius:10px">
-      </canvas>
+      <image :src="localPosterPath"  class="img"
+      mode='aspectFill' />
       <button size='mini'
       class="savePoster"
       @tap="savePoster"
@@ -22,7 +24,8 @@ import { promisify } from '@/utils/tools'
 export default {
   data () {
     return {
-      complete: false
+      complete: false,
+      localPosterPath: ''
     }
   },
   methods: {
@@ -38,16 +41,9 @@ export default {
       this.drawCanvas()
     },
     async savePoster () {
-      const saveCanvasToPath = promisify(wx.canvasToTempFilePath)
       const saveImageToAlbum = promisify(wx.saveImageToPhotosAlbum)
-      let saveCanvasToPathP = saveCanvasToPath({
-        canvasId: 'shareCanvas',
-        fileType: 'jpg'
-      })
-      let canvasPath = (await saveCanvasToPathP).tempFilePath
-
       saveImageToAlbum({
-        filePath: canvasPath
+        filePath: this.localPosterPath
       }).then((res) => {
         console.log(res)
         wx.hideLoading()
@@ -57,12 +53,12 @@ export default {
       wx.showLoading({title: '正在生成'})
       const getImageInfo = promisify(wx.getImageInfo)
       let bgPathP = getImageInfo({src: 'http://img2015.zdface.com/20180509/726dd112f07705186da69d790eaf1f5a.jpg'})
-      // 应该向服务器请求获取二维码图片
+      // 此处应该向服务器请求获取二维码图片
       let qrcodePathP = getImageInfo({src: 'http://src.onlinedown.net/images/xcs/10/2017-07-13_59673fd3e2f2c.jpg'})
 
       let bgImg = await bgPathP
       let qrcodeImg = await qrcodePathP
-
+      console.log(bgImg)
       const ctx = wx.createCanvasContext('shareCanvas')
       // clip圆角
       function roundRect (x, y, w, h, r) {
@@ -74,24 +70,23 @@ export default {
         ctx.arcTo(x, y, x + w, y, r)
         ctx.closePath()
       }
-
-      roundRect(0, 0, 300, 400, 10)
+      roundRect(0, 0, 600, 479, 10)
 
       ctx.clip()
       // 绘制背景图
       // ctx.setGlobalAlpha(0.5)
-      ctx.drawImage(bgImg.path, 130, 0, 300, 400, 0, 0, 300, 400)
-      ctx.setGlobalAlpha(1)
+      ctx.drawImage(bgImg.path, 0, 0, 600, 479, 0, 0, 600, 479)
+      ctx.setGlobalAlpha(0.8)
       ctx.restore()
       // 绘制二维码
       ctx.drawImage(qrcodeImg.path, 20, 20, 100, 100)
       // 绘制文字
       ctx.setFillStyle('#ff6666')
-      ctx.setFontSize(24)
+      ctx.setFontSize(28)
       ctx.setTextAlign('left')
-      ctx.fillText('恭喜发财,获得十元', 20, 330)
-      ctx.setFontSize(14)
-      ctx.fillText(new Date().toLocaleString(), 20, 360)
+      ctx.fillText('恭喜发财,获得十元', 20, 420)
+      ctx.setFontSize(18)
+      ctx.fillText(new Date().toLocaleString(), 20, 450)
       // 绘制路径
       ctx.setStrokeStyle('#fff')
       ctx.moveTo(10, 10)
@@ -102,29 +97,41 @@ export default {
       ctx.stroke()
 
       ctx.draw()
-      this.complete = true
-      wx.hideLoading()
+
+      setTimeout(async() => {
+        const saveCanvasToPath = promisify(wx.canvasToTempFilePath)
+        let saveCanvasToPathP = saveCanvasToPath({
+          canvasId: 'shareCanvas',
+          fileType: 'jpg'
+        })
+
+        let canvasPath = (await saveCanvasToPathP).tempFilePath
+
+        this.localPosterPath = canvasPath
+        this.complete = true
+        wx.hideLoading()
+      }, 100)
     }
   },
   onUnload () {
-    this.complete = false
+    // this.complete = false
+  },
+  mounted () {
+
   }
 }
 </script>
 
 <style scoped lang="scss">
-.canvas_wrap{
-  position: relative;
-
-}
-.canvas {
-  width: 300px;
-  height: 400px;
+.img {
+  position: absolute;
   left: 50%;
-  top: 20rpx;
-  transform: translate(-50%, 0);
-  // border-radius: 8px;
-  // overflow: hidden;
+  top: 38%;
+  width: 600rpx;
+  height: 479rpx;
+  box-shadow:0px 4px 5px 1px rgba(0,0,0,0.4);
+  border-radius:10px;
+  transform: translate(-50%, -50%);
 }
 .savePoster{
   position: fixed;

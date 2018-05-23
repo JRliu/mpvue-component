@@ -1,12 +1,57 @@
 $col_length: 24;
+.my-row {
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
 
-.my-col{
-  float: left;
-  box-sizing:border-box;
+.my-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.my-flex-start {
+  justify-content: flex-start;
+}
+
+.my-flex-end {
+  justify-content: flex-end;
+}
+
+.my-flex-center {
+  justify-content: center;
+}
+
+.my-flex-space-between {
+  justify-content: space-between;
+}
+
+.my-flex-space-around {
+  justify-content: space-around;
+}
+
+.my-flex-top {
+  align-items: flex-start;
+}
+
+.my-flex-middle {
+  align-items: center;
+}
+
+.my-flex-bottom {
+  align-items: flex-end;
 }
 
 @for $index from 1 through $col_length {
   .my-col-#{$index} {
+    display: block;
+    float: left;
+    box-sizing: border-box;
     width: 100% / $col_length * $index;
   }
   .my-col-offset-#{$index} {

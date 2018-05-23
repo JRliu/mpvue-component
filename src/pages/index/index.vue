@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import '@/style/grid.scss'
 export default {
   data () {
     return {

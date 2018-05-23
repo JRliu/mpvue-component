@@ -17,6 +17,7 @@
       <button @tap="goWaterfall">waterfall</button>
       <button @tap="goLoadmore">loadmore</button>
       <button @tap="goTabbar">tabbar</button>
+      <button @tap="goPoster">poster</button>
     </div>
   </div>
 </template>
@@ -59,6 +60,11 @@ export default {
     goTabbar () {
       wx.navigateTo({
         url: '/pages/tabbar/main'
+      })
+    },
+    goPoster () {
+      wx.navigateTo({
+        url: '/pages/poster/main'
       })
     }
   },

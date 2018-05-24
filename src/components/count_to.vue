@@ -1,5 +1,5 @@
 <template>
-  <p class="my_count_to" :class="className">{{showNum}}</p>
+  <p class="my-count-to" :class="className">{{showNum}}</p>
 </template>
 
 <script>

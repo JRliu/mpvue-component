@@ -30,7 +30,7 @@
       },
       positionClass () {
         let p = this.position
-        if (p === 'center' || p === 'top' || p === 'bottom') {
+        if (p === 'middle' || p === 'top' || p === 'bottom') {
           return p
         }
         // 默认position为bottom
@@ -83,7 +83,7 @@
     background-color: rgba(0,0,0,0.5);
     border-radius: 10rpx;
     transform: translate(-50%, -50%);
-    animation: toast-center 500ms;
+    animation: toast-middle 500ms;
     z-index: 9;
     &.show{
       display: block;
@@ -101,7 +101,7 @@
     }
   }
 
-  @keyframes toast-center {
+  @keyframes toast-middle {
     from {
       opacity: 0;
       transform: translate(-50%, -60%);

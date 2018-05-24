@@ -96,9 +96,7 @@ export default {
       ctx.lineTo(10, 10)
       ctx.stroke()
 
-      ctx.draw()
-
-      setTimeout(async() => {
+      ctx.draw(false, async () => {
         const saveCanvasToPath = promisify(wx.canvasToTempFilePath)
         let saveCanvasToPathP = saveCanvasToPath({
           canvasId: 'shareCanvas',
@@ -106,15 +104,14 @@ export default {
         })
 
         let canvasPath = (await saveCanvasToPathP).tempFilePath
-
         this.localPosterPath = canvasPath
         this.complete = true
         wx.hideLoading()
-      }, 100)
+      })
     }
   },
   onUnload () {
-    // this.complete = false
+    this.complete = false
   },
   mounted () {
 
@@ -129,7 +126,7 @@ export default {
   top: 38%;
   width: 600rpx;
   height: 479rpx;
-  box-shadow:0px 4px 5px 1px rgba(0,0,0,0.4);
+  box-shadow: 2rpx 5rpx 10rpx 0rpx rgba(0,0,0,0.4);
   border-radius:10px;
   transform: translate(-50%, -50%);
 }

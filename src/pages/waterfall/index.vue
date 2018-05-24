@@ -203,6 +203,11 @@
           this.getImages()
         }
       })
+    },
+    onUnload () {
+      this.images = []
+      this.colLeft.list = []
+      this.colRight.list = []
     }
   }
 

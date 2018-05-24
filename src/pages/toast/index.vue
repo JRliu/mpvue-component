@@ -3,7 +3,7 @@
     <div class="btns">
       <button  @tap="showToast('default')"  hover-class="none">default</button>
       <button  @tap="showToast('top')"  hover-class="none">top</button>
-      <button  @tap="showToast('center')"  hover-class="none">center</button>
+      <button  @tap="showToast('middle')"  hover-class="none">center</button>
       <button  @tap="showToast('bottom')"  hover-class="none">bottom</button>
     </div>
     <toast ref='toast'></toast>

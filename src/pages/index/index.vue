@@ -11,11 +11,15 @@
       </p>
     </div>
     <div class="btns">
-      <button @tap="goPopup">popup</button>
-      <button @tap="goToast">toast</button>
-      <button @tap="goCountTo">countTo</button>
-      <button @tap="goWaterfall">waterfall</button>
-      <button @tap="goLoadmore">loadmore</button>
+      <button @tap="goPage('popup')">popup</button>
+      <button @tap="goPage('toast')">toast</button>
+      <button @tap="goPage('count_to')">countTo</button>
+      <button @tap="goPage('waterfall')">waterfall</button>
+      <button @tap="goPage('loadmore')">loadmore</button>
+      <button @tap="goPage('tabbar')">tabbar</button>
+      <button @tap="goPage('poster')">poster</button>
+      <button @tap="goPage('number_input')">numberInput</button>
+      <button @tap="goPage('qrcode')">qrcode</button>
     </div>
   </div>
 </template>
@@ -29,29 +33,9 @@ export default {
     }
   },
   methods: {
-    goPopup () {
+    goPage (page) {
       wx.navigateTo({
-        url: '/pages/popup/main'
-      })
-    },
-    goToast () {
-      wx.navigateTo({
-        url: '/pages/toast/main'
-      })
-    },
-    goCountTo () {
-      wx.navigateTo({
-        url: '/pages/count_to/main'
-      })
-    },
-    goWaterfall () {
-      wx.navigateTo({
-        url: '/pages/waterfall/main'
-      })
-    },
-    goLoadmore () {
-      wx.navigateTo({
-        url: '/pages/loadmore/main'
+        url: `/pages/${page}/main`
       })
     }
   },
@@ -63,12 +47,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .container{
+    padding: 80rpx 0;
+  }
   .header{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 50rpx 0 100rpx;
+    margin: 0 0 50rpx;
   }
   .avatar{
     width: 160rpx;

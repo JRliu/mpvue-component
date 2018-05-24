@@ -10,7 +10,7 @@
         </span>！
       </p>
     </div>
-    <div class="btns">
+    <div class="btns my-flex my-flex-space-around">
       <button @tap="goPage('popup')">popup</button>
       <button @tap="goPage('toast')">toast</button>
       <button @tap="goPage('count_to')">countTo</button>
@@ -20,11 +20,13 @@
       <button @tap="goPage('poster')">poster</button>
       <button @tap="goPage('number_input')">numberInput</button>
       <button @tap="goPage('qrcode')">qrcode</button>
+      <button @tap="goPage('grid')">grid</button>
     </div>
   </div>
 </template>
 
 <script>
+import '@/style/grid.scss'
 export default {
   data () {
     return {
@@ -69,7 +71,10 @@ export default {
   .btns{
     button{
       margin-top: 20rpx;
-      width: 600rpx;
+      width: 300rpx;
+      height: 70rpx;
+      line-height: 70rpx;
+      font-size: 30rpx;
     }
   }
 </style>

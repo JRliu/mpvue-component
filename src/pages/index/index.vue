@@ -21,6 +21,7 @@
       <button @tap="goPage('number_input')">numberInput</button>
       <button @tap="goPage('qrcode')">qrcode</button>
       <button @tap="goPage('grid')">grid</button>
+      <button @tap="goPage('noticebar')">noticebar</button>
     </div>
   </div>
 </template>

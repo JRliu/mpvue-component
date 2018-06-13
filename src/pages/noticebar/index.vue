@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <p class='title'>文字超出容器，则滚动轮播</p>
-    <noticebar :msg="msg"></noticebar>
+    <noticebar :msg="msg"  :can-close="false"></noticebar>
     <p class='title'>文字不超出容器，则居中</p>
     <noticebar :msg="msg1" :className="'noticebar_blue'"></noticebar>
   </div>

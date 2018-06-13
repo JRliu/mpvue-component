@@ -1,8 +1,11 @@
 <template>
-  <div class="my-noticebar" :class='[className, id]'>
+  <div class="my-noticebar" :class='[className, id]' :style='{display: display}'>
     <div class="wrap"  :style='{textAlign: textAlign}'>
       <p class="text" :style='{marginLeft: -textMarginLeft + "px"}'>{{msg}}</p>
       <p class="text" :style='{display: shadowTextDisplay}'>{{msg}}</p>
+    </div>
+    <div class="close"  @click="close"  v-if="canClose">
+      <icon type="clear" size="15"/>
     </div>
   </div>
 </template>
@@ -14,6 +17,10 @@
       },
       className: {
         type: String
+      },
+      canClose: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
@@ -21,7 +28,8 @@
         textMarginLeft: 0,
         shadowTextDisplay: 'none',
         textAlign: 'center',
-        id: 'noticebar-' + parseInt(Math.random() * 100000000)
+        id: 'noticebar-' + parseInt(Math.random() * 100000000),
+        display: 'block'
       }
     },
     methods: {
@@ -37,6 +45,9 @@
           marginLeft++
         }
         this.textMarginLeft = marginLeft
+      },
+      close () {
+        this.display = 'none'
       }
     },
     async mounted () {
@@ -70,16 +81,21 @@
 <style lang="scss" scoped>
   .my-noticebar{
     position: relative;
-  }
-  .wrap{
-    background-color: #ff3666;
-  }
-  p{
-    display: inline;
-    padding: 0 30px;
-    font-size: 24rpx;
-    color: #fff;
-    white-space: nowrap;
-    vertical-align: 4rpx;
+    .wrap{
+      background-color: #ff3666;
+    }
+    p{
+      display: inline;
+      padding: 0 40px;
+      font-size: 24rpx;
+      color: #fff;
+      white-space: nowrap;
+      vertical-align: 4rpx;
+    }
+    .close{
+      position: absolute;
+      top: 0;
+      right: 10rpx;
+    }
   }
 </style>

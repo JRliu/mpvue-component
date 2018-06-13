@@ -19,6 +19,7 @@
       <button @tap="goPage('tabbar')">tabbar</button>
       <button @tap="goPage('poster')">poster</button>
       <button @tap="goPage('number_input')">numberInput</button>
+      <button @tap="goPage('guide')">guide</button>
       <button @tap="goPage('qrcode')">qrcode</button>
       <button @tap="goPage('grid')">grid</button>
     </div>
@@ -71,7 +72,7 @@ export default {
   .btns{
     button{
       margin-top: 20rpx;
-      width: 300rpx;
+      width: 30%;
       height: 70rpx;
       line-height: 70rpx;
       font-size: 30rpx;

@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app-loadmore">
     <loadmore  type="loading"></loadmore>
     <loadmore  type="nomore"></loadmore>
     <loadmore  type="nodata"></loadmore>

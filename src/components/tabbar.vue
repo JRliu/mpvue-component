@@ -17,7 +17,7 @@
         :class="{'active': activeIndex === index}">
         {{item}}
       </div>
-      <div class="active_style" :style='{width: scrollWrapStyle.width}'></div>
+      <div class="active_style" :style='{width: activeStyle.width,left: activeStyle.left,display:activeStyle.display}'></div>
     </scroll-view>
   </div>
 </template>
@@ -43,7 +43,7 @@
     },
     data () {
       return {
-        activeIndex: 0,
+        activeIndex: -1,
         activeStyle: {
           left: 0,
           top: 0,
@@ -69,31 +69,43 @@
           data: this.activeItem,
           index: this.activeIndex
         })
-        console.log('select')
       }
     },
     watch: {
       activeIndex: {
         handler (val, oldVal) {
           // 控制type为default时的underline
-          if (this.type !== 'default') {
-            return
+          let wrapClass = '.item_wrap'
+          if (this.type === 'scroll') {
+            // return
+            wrapClass = '.item_wrap--scroll'
           }
           this.$nextTick(async () => {
-            let getRects = new Promise((resolve) => {
-              wx.createSelectorQuery().selectAll('.item_wrap .item').boundingClientRect(function (rects) {
-                resolve(rects)
-              }).exec()
-            })
-            let activeRect = (await getRects)[val]
+            function getRects (selector) {
+              return new Promise((resolve) => {
+                wx.createSelectorQuery().selectAll(selector).fields({
+                  rect: true,
+                  scrollOffset: true,
+                  size: true
+                }, function (rects) {
+                  resolve(rects)
+                }).exec()
+              })
+            }
+            let getRectsP = getRects(wrapClass + ' .item')
+            let getWrapRectsP = getRects(wrapClass)
+
+            let activeRect = (await getRectsP)[val]
+            let getWrapRect = (await getWrapRectsP)[0]
             // console.log(activeRect)
+            // console.log(getWrapRect)
             this.activeStyle.display = 'block'
-            this.activeStyle.top = activeRect.top + activeRect.height + 'px'
-            this.activeStyle.left = activeRect.left + 'px'
+            this.activeStyle.top = activeRect.top + activeRect.height - 2 + 'px'
+            this.activeStyle.left = activeRect.left + getWrapRect.scrollLeft + 'px'
             this.activeStyle.width = activeRect.width + 'px'
           })
         },
-        immediate: true
+        immediate: false
       },
       active (val) { // 手动修改当前项
         if (val === this.activeIndex) {
@@ -103,10 +115,13 @@
       }
     },
     mounted () {
-      this.$emit('select', { // 挂载后马上触发选择第一项
+      this.$emit('select', {
         data: this.list[0],
         index: 0
       })
+      setTimeout(() => {
+        this.activeIndex = 0
+      }, 100)
     }
   }
 </script>
@@ -114,56 +129,51 @@
 <style lang="scss" scoped>
   $active_color: #ff3366;
 
-  .item_wrap{
+  .my-tabbar{
     position: relative;
-    display: flex;
-    justify-content: space-around;
-    .item{
-      padding: 3px 5px;
-      margin: 0 10px;
-      font-size: 28rpx;
-      line-height: 2;
-      text-align:center;
-      color: #666;
-      flex: 1;
-      &.active{
-        color: $active_color;
-      }
-    }
-    .active_style{
-      position: fixed;
-      height: 2px;
-      background-color: $active_color;
-      transition: all 0.3s;
-    }
-  }
-  .item_wrap--scroll{
-    width: 750rpx;
-    white-space:nowrap;
-    .item{
-      display: inline-block;
+    .item_wrap{
       position: relative;
-      padding: 5px 10px;
-      line-height: 2;
-      font-size: 26rpx;
-      color: #666;
-      &.active{
-        color: $active_color;
+      display: flex;
+      justify-content: space-around;
+      .item{
+        padding: 3px 5px;
+        margin: 0 10px;
+        font-size: 28rpx;
+        line-height: 2;
+        text-align:center;
+        color: #666;
+        flex: 1;
+        &.active{
+          color: $active_color;
+        }
       }
-      &::after{
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 100%;
+      .active_style{
+        position: fixed;
         height: 2px;
-        width: 0%;
         background-color: $active_color;
-        transition: width 300ms, left 300ms;
+        transition: all 0.3s;
       }
-      &.active::after{
-        left: 0;
-        width: 100%;
-        transition: width 300ms;
+    }
+    .item_wrap--scroll{
+      width: 750rpx;
+      white-space:nowrap;
+      .item{
+        display: inline-block;
+        position: relative;
+        padding: 5px 10px;
+        line-height: 2;
+        font-size: 26rpx;
+        color: #666;
+        &.active{
+          color: $active_color;
+        }
+      }
+      .active_style{
+        position: absolute;
+        top: 68rpx;
+        height: 2px;
+        background-color: $active_color;
+        transition: all 0.3s;
       }
     }
   }

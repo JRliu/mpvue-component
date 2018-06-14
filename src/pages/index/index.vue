@@ -23,6 +23,7 @@
       <button @tap="goPage('qrcode')">qrcode</button>
       <button @tap="goPage('grid')">grid</button>
       <button @tap="goPage('noticebar')">noticebar</button>
+      <button @tap="goPage('slide_left')">slide_left</button>
     </div>
   </div>
 </template>

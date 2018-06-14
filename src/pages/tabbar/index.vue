@@ -37,7 +37,6 @@
         this.activeTab = arg.index + ' : ' + arg.data
       },
       selectTab2 (arg) {
-        console.log(arg)
         this.activeTab2 = arg.index + ' : ' + arg.data
       }
     }

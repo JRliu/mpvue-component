@@ -10,7 +10,7 @@
         </span>！
       </p>
     </div>
-    <div class="btns my-flex my-flex-space-around">
+    <div class="btns app-flex app-flex-space-around">
       <button @tap="goPage('popup')">popup</button>
       <button @tap="goPage('toast')">toast</button>
       <button @tap="goPage('count_to')">countTo</button>
@@ -24,6 +24,7 @@
       <button @tap="goPage('grid')">grid</button>
       <button @tap="goPage('noticebar')">noticebar</button>
       <button @tap="goPage('slide_left')">slide_left</button>
+      <button @tap="goPage('rater')">rater</button>
     </div>
   </div>
 </template>

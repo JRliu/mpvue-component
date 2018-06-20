@@ -2,17 +2,17 @@
   <div class="app">
     <div class="btns">
       <button  @tap="showToast('default')"
-        :class='[{"my-guide_item": guideIndex === 2}]'
+        :class='[{"app-guide_item": guideIndex === 2}]'
         >default</button>
       <button  @tap="showToast('top')"
-        :class='[{"my-guide_item": guideIndex === 5}]'
+        :class='[{"app-guide_item": guideIndex === 5}]'
         >top</button>
       <button  @tap="showToast('middle')"
-        :class='[{"my-guide_item": guideIndex === 3}]'
+        :class='[{"app-guide_item": guideIndex === 3}]'
         >center</button>
-      <button  @tap="showToast('bottom')" :class='[{"my-guide_item": guideIndex === 4}]'>bottom</button>
+      <button  @tap="showToast('bottom')" :class='[{"app-guide_item": guideIndex === 4}]'>bottom</button>
     </div>
-    <button :class='[{"my-guide_item": guideIndex === 1}]'
+    <button :class='[{"app-guide_item": guideIndex === 1}]'
       size=mini
       @click="startGuide">开始</button>
     <toast ref='toast'></toast>
@@ -91,7 +91,7 @@
   }
 </style>
 <style>
-  .my-guide_img{
+  .app-guide_img{
     width: 50px;
     height: 30px;
   }

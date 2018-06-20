@@ -1,5 +1,5 @@
 $col_length: 24;
-.my-row {
+.app-row {
   &::after {
     content: "";
     display: block;
@@ -9,52 +9,52 @@ $col_length: 24;
   }
 }
 
-.my-flex {
+.app-flex {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.my-flex-start {
+.app-flex-start {
   justify-content: flex-start;
 }
 
-.my-flex-end {
+.app-flex-end {
   justify-content: flex-end;
 }
 
-.my-flex-center {
+.app-flex-center {
   justify-content: center;
 }
 
-.my-flex-space-between {
+.app-flex-space-between {
   justify-content: space-between;
 }
 
-.my-flex-space-around {
+.app-flex-space-around {
   justify-content: space-around;
 }
 
-.my-flex-top {
+.app-flex-top {
   align-items: flex-start;
 }
 
-.my-flex-middle {
+.app-flex-middle {
   align-items: center;
 }
 
-.my-flex-bottom {
+.app-flex-bottom {
   align-items: flex-end;
 }
 
 @for $index from 1 through $col_length {
-  .my-col-#{$index} {
+  .app-col-#{$index} {
     display: block;
     float: left;
     box-sizing: border-box;
     width: 100% / $col_length * $index;
   }
-  .my-col-offset-#{$index} {
+  .app-col-offset-#{$index} {
     margin-left: 100% / $col_length * $index;
   }
 }

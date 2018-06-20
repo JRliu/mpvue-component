@@ -1,13 +1,13 @@
 <template>
-  <div class="my-guide"
+  <div class="app-guide"
     :class="[className]">
     <div class="guide_mask" @click="guideNext" v-if="index <= msg.length"></div>
     <div class="guide_msg"
       :style='{left:guideMsgPos.l+"px",top:guideMsgPos.t+"px",right:guideMsgPos.r+"px",bottom:guideMsgPos.b+"px"}'
       v-if="index <= msg.length"
     >
-      <p v-if='text'  class='my-guide_text'>{{text}}</p>
-      <img :src='src' alt="" v-if='src' class='my-guide_img'>
+      <p v-if='text'  class='app-guide_text'>{{text}}</p>
+      <img :src='src' alt="" v-if='src' class='app-guide_img'>
     </div>
   </div>
 </template>
@@ -77,7 +77,7 @@
         this.index ++
         this.$emit('update:index', this.index)
         this.$nextTick(() => {
-          wx.createSelectorQuery().select('.my-guide_item').fields({
+          wx.createSelectorQuery().select('.app-guide_item').fields({
             rect: true
           }, (res) => {
             if (!res) {
@@ -124,7 +124,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .my-guide{
+  .app-guide{
     .guide_mask{
       position: fixed;
       z-index: 9;
@@ -148,7 +148,7 @@
   }
 </style>
 <style lang="scss">
-  .my-guide_item{
+  .app-guide_item{
     z-index: 10;
     box-shadow: 0 0 0 9999px rgba(0,0,0,0.5);
   }

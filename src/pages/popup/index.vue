@@ -6,6 +6,7 @@
       <button  @tap="togglePopup('rightPopup')">right</button>
       <button  @tap="togglePopup('bottomPopup')">bottom</button>
       <button  @tap="togglePopup('leftPopup')">left</button>
+      <button  @tap="togglePopup('clickMaskClose')">点击mask不关闭</button>
       <button  @tap="togglePopup('topNoMaskPopup')">top notice</button>
     </div>
     <popup ref="centerPopup">
@@ -34,6 +35,13 @@
       <p>test</p>
       <p>test</p>
       <p>test</p>
+    </popup>
+    <popup ref="clickMaskClose"  type="left" :click-mask-close="false">
+      <p v-for="item in list" :key="item">item</p>
+      <p>test</p>
+      <p>test</p>
+      <p>test</p>
+      <button @click="togglePopup('clickMaskClose')">关闭</button>
     </popup>
     <popup ref="topNoMaskPopup"  type="top" :mask="false"
       :duration='3000'  mask-color='rgba(0,0,0,0)'>

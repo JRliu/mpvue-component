@@ -9,7 +9,7 @@
       <!-- 由于mpvue的问题，slot的作用域还是在这个组件内。所以暂时不支持动态渲染。 -->
     </div>
     <div class="mask"
-      @tap="toggle('hide')"
+      @click="clickMask()"
       :class="maskClass"
       :style="{backgroundColor: maskColor}"></div>
   </div>
@@ -33,6 +33,10 @@
       className: {
         type: String,
         default: ''
+      },
+      clickMaskClose: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
@@ -90,6 +94,12 @@
 
         if (this.show) {
           this.componentDisplay = 'block'
+        }
+      },
+      clickMask () {
+        let clickMaskClose = this.clickMaskClose
+        if (clickMaskClose) {
+          this.toggle('hide')
         }
       }
     }

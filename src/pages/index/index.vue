@@ -25,6 +25,7 @@
       <button @tap="goPage('noticebar')">noticebar</button>
       <button @tap="goPage('slide_left')">slide_left</button>
       <button @tap="goPage('rater')">rater</button>
+      <button @tap="goPage('count_down')">count_down</button>
     </div>
   </div>
 </template>
